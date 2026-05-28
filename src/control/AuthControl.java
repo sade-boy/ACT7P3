@@ -15,6 +15,6 @@ public class AuthControl {
     }
 
     public void showRegister() {
-        vista.registroView();
+        vista.registerView();
     }
 }
