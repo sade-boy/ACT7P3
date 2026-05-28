@@ -1,287 +1,94 @@
 package views;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
+<<<<<<< HEAD
+=======
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import models.User;
+
+>>>>>>> 809b7a8bf1381304f58afe62c4a7e01f2dc14182
+
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
-
 
 import models.AuthModel;
 
 public class AuthView {
 
-	private AuthModel model;
-	
-	
-	public AuthView() {
-		
-		model = new AuthModel();
+    private AuthModel model;
 
-	}
-	
-	public void loginView()
-	{
-		
-		JFrame ventana = new JFrame();
-		ventana.setSize(1000, 640);
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setLocationRelativeTo(null);
-		ventana.setMinimumSize(new Dimension(200,200));
-		ventana.setMaximumSize(new Dimension(1200,800));
-		ventana.setTitle("Hola"); 
-		ventana.getContentPane().setBackground(Color.decode("#C8DEBD"));
-		ventana.setLayout(null);
-		
-		JTextField textField;
-		JPasswordField passwordField;
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 255, 255)); 
-		panel.setLocation(0, 0);
-		panel.setLayout(null);
-		panel.setSize(1000, 600); 
-		
-		JLabel lblNewLabel = new JLabel("UABCS - DASC\n");
-		lblNewLabel.setForeground(new Color(0, 0, 0));
-		lblNewLabel.setFont(new Font("Kefa", Font.PLAIN, 24));
-		lblNewLabel.setBounds(107, 35, 210, 26);
-		lblNewLabel.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(lblNewLabel);
-		
-		JLabel lblNewLabel_8 = new JLabel("");
-		lblNewLabel_8.setBounds(36, 186, 353, 81);
-		lblNewLabel_8.setBorder(BorderFactory.createTitledBorder("Correo electrónico"));
-		panel.add(lblNewLabel_8);
-		
-		textField = new JTextField();
-		textField.setBackground(new Color(218, 230, 225));
-		textField.setBounds(49, 211, 328, 42);
-		panel.add(textField);
-		textField.setBorder(new LineBorder(new Color(91, 253, 255), 1, true));
-		textField.setBorder(null);
-		textField.setColumns(10);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBackground(new Color(218, 230, 225));
-		passwordField.setBounds(49, 300, 295, 42);
-		panel.add(passwordField);
-		
-		JButton btnNewButton = new JButton("Acceder");
-		btnNewButton.setBackground(new Color(0, 0, 0));
-		btnNewButton.setOpaque(true);
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				String passText = new String(passwordField.getPassword());
-				Boolean flag1 = false, flag2 = false;
-				
-				
-				if( passText.equals("") ) {
-					
-					passwordField.setBorder(BorderFactory.createLineBorder(Color.red,2));
-					
-				}else {
-					
-					passwordField.setBorder(BorderFactory.createLineBorder(Color.green,2));
-					flag1 = true;
-				}
-				
-				
-				if(textField.getText().equals("")) {
-					textField.setBorder(BorderFactory.createLineBorder(Color.red,2));
-				}else {
-					
-					textField.setBorder(BorderFactory.createLineBorder(Color.green,2));
-					flag2 = true;
-				}
-				
-				if(flag1 && flag2) { 
-					
-					 if(model.access(textField.getText(), passText) ) {
-						 JOptionPane.showMessageDialog(null, "Bienvenido.");
-						 
-						 ventana.dispose();
-						
-						
-					}else {
-						JOptionPane.showMessageDialog(null, "Error al acceder","verifique su información",JOptionPane.WARNING_MESSAGE);
-					} 
-					
-					
-				}
-				
-			}
-		});
-		btnNewButton.setBounds(36, 413, 341, 37);
-		panel.add(btnNewButton);
-		
-		JLabel lblNewLabel_1 = new JLabel("Sabiduría como meta, patria como destino ");
-		lblNewLabel_1.setBounds(69, 73, 308, 16);
-		lblNewLabel_1.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_6 = new JLabel("");
-		
-		
-		JLabel lblNewLabel_2_1 = new JLabel("Ingresa al panel administrador");
-		lblNewLabel_2_1.setForeground(Color.BLACK);
-		lblNewLabel_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 21));
-		lblNewLabel_2_1.setBounds(49, 109, 340, 39);
-		lblNewLabel_2_1.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(lblNewLabel_2_1);
-		
-		JLabel lblNewLabel_8_1 = new JLabel("");
-		lblNewLabel_8_1.setBorder(BorderFactory.createTitledBorder("Contraseña"));
-		lblNewLabel_8_1.setBounds(36, 279, 353, 81);
-		panel.add(lblNewLabel_8_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("");
-		
-		
-		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Recordar contraseña");
-		chckbxNewCheckBox.setBounds(36, 372, 180, 23);
-		panel.add(chckbxNewCheckBox);
-		
-		JLabel lblNewLabel_3 = new JLabel("¿Aún no tienes cuenta?");
-		lblNewLabel_3.setBounds(225, 462, 152, 16);
-		panel.add(lblNewLabel_3);
-		
-		JButton btnNewButton2 = new JButton("Crea una aquí");
-		btnNewButton2.setBackground(new Color(0, 0, 0));
-		btnNewButton2.setOpaque(true);
-		btnNewButton2.setForeground(new Color(0, 0, 0));
-		btnNewButton2.setBounds(205, 490, 200, 20);
-		btnNewButton2.addActionListener(new ActionListener() {
+    public AuthView() {
+        model = new AuthModel();
+    }
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-				ventana.dispose(); 
-		    	registerView();
-			}});
-		
-		panel.add(btnNewButton2);
-		
-		ventana.add(panel);
-		ventana.setVisible(true);
-	}
-	
-	public void registerView()
-	{
-		JFrame ventana = new JFrame();
-		ventana.setSize(1000, 640);
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setLocationRelativeTo(null);
-		ventana.setMinimumSize(new Dimension(200,200));
-		ventana.setMaximumSize(new Dimension(1200,800));
-		ventana.setTitle("Hola"); 
-		ventana.getContentPane().setBackground(Color.decode("#C8DEBD"));
-		ventana.setLayout(null); 
+    public void loginView() {
 
-	    JPanel panel = new JPanel();
-	    panel.setBackground(Color.WHITE);
-	    panel.setLayout(null);
-	    panel.setBounds(0, 0, 1000, 600);
+        JFrame ventana = new JFrame();
 
-	    // Título principal
-	    JLabel titulo = new JLabel("UABCS – DASC");
-	    titulo.setForeground(Color.BLACK);
-	    titulo.setFont(new Font("Kefa", Font.PLAIN, 24));
-	    titulo.setHorizontalAlignment(SwingConstants.CENTER);
-	    titulo.setBounds(110, 30, 260, 35);
-	    panel.add(titulo);
+        ventana.setTitle("Login");
+        ventana.setSize(500, 400);
+        ventana.setLocationRelativeTo(null);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventana.setLayout(null);
 
-	    JLabel subtitulo = new JLabel("Crea tu cuenta de usuario");
-	    subtitulo.setForeground(Color.BLACK);
-	    subtitulo.setFont(new Font("Lucida Grande", Font.PLAIN, 22));
-	    subtitulo.setHorizontalAlignment(SwingConstants.CENTER);
-	    subtitulo.setBounds(75, 90, 340, 35);
-	    panel.add(subtitulo);
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBackground(Color.WHITE);
+        panel.setBounds(0, 0, 500, 400);
 
-	    JLabel lema = new JLabel("Sabiduría como meta, patria como destino");
-	    lema.setHorizontalAlignment(SwingConstants.CENTER);
-	    lema.setBounds(70, 65, 340, 20);
-	    panel.add(lema);
+        JLabel titulo = new JLabel("Iniciar sesión");
+        titulo.setFont(new Font("Arial", Font.BOLD, 25));
+        titulo.setBounds(140, 30, 250, 30);
 
-	    // ---------- Campo Nombre ----------
-	    JPanel nombrePanel = new JPanel(null);
-	    nombrePanel.setBackground(Color.WHITE);
-	    nombrePanel.setBorder(BorderFactory.createTitledBorder("Nombre completo"));
-	    nombrePanel.setBounds(45, 145, 360, 75);
+        panel.add(titulo);
 
-	    JTextField nombreField = new JTextField();
-	    nombreField.setBounds(18, 28, 325, 35);
-	    nombreField.setBackground(new Color(218, 230, 225));
-	    nombreField.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-	    nombrePanel.add(nombreField);
+        JLabel userLabel = new JLabel("Usuario");
+        userLabel.setBounds(60, 90, 100, 30);
+        panel.add(userLabel);
 
-	    panel.add(nombrePanel);
+        JTextField userField = new JTextField();
+        userField.setBounds(60, 120, 340, 35);
+        panel.add(userField);
 
-	    // ---------- Campo Correo ----------
-	    JPanel correoPanel = new JPanel(null);
-	    correoPanel.setBackground(Color.WHITE);
-	    correoPanel.setBorder(BorderFactory.createTitledBorder("Correo electrónico"));
-	    correoPanel.setBounds(45, 230, 360, 75);
+        JLabel passLabel = new JLabel("Contraseña");
+        passLabel.setBounds(60, 180, 100, 30);
+        panel.add(passLabel);
 
-	    JTextField correoField = new JTextField();
-	    correoField.setBounds(18, 28, 325, 35);
-	    correoField.setBackground(new Color(218, 230, 225));
-	    correoField.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-	    correoPanel.add(correoField);
+        JPasswordField passField = new JPasswordField();
+        passField.setBounds(60, 210, 340, 35);
+        panel.add(passField);
 
-	    panel.add(correoPanel);
+        JButton login = new JButton("Entrar");
+        login.setBounds(60, 280, 340, 40);
+        login.setBackground(Color.BLACK);
+        login.setForeground(Color.WHITE);
 
-	    // ---------- Campo Contraseña ----------
-	    JPanel passPanel = new JPanel(null);
-	    passPanel.setBackground(Color.WHITE);
-	    passPanel.setBorder(BorderFactory.createTitledBorder("Contraseña"));
-	    passPanel.setBounds(45, 315, 360, 75);
+        panel.add(login);
 
-	    JPasswordField passwordField = new JPasswordField();
-	    passwordField.setBounds(18, 28, 290, 35);
-	    passwordField.setBackground(new Color(218, 230, 225));
-	    passwordField.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-	    passPanel.add(passwordField);
+        ventana.add(panel);
 
-	    JLabel iconoOjo = new JLabel();
-	    iconoOjo.setBounds(318, 36, 20, 20);
-	    try {
-	        iconoOjo.setIcon(new ImageIcon(this.getClass().getResource("/img/hidden.png")));
-	    } catch (Exception ex) {
-	        iconoOjo.setText("👁");
-	    }
-	    passPanel.add(iconoOjo);
+        login.addActionListener(e -> {
 
-	    panel.add(passPanel);
+            String username = userField.getText();
+            String password = new String(passField.getPassword());
 
-	    // ---------- Campo Biografía ----------
-	    JPanel bioPanel = new JPanel(null);
-	    bioPanel.setBackground(Color.WHITE);
-	    bioPanel.setBorder(BorderFactory.createTitledBorder("Biografía"));
-	    bioPanel.setBounds(45, 400, 360, 90);
+            boolean acceso = model.access(username, password);
 
+<<<<<<< HEAD
+            if (acceso) {
+=======
 	    JTextArea bio = new JTextArea();
 	    bio.setLineWrap(true);
 	    bio.setWrapStyleWord(true);
@@ -475,10 +282,82 @@ public class AuthView {
 	    ventana.setVisible(true);
 	}
 
+>>>>>>> 809b7a8bf1381304f58afe62c4a7e01f2dc14182
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Bienvenido"
+                );
+
+<<<<<<< HEAD
+                ventana.dispose();
+
+                UsersView uv = new UsersView();
+                uv.setVisible(true);
+
+            } else {
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Usuario o contraseña incorrectos"
+                );
+            }
+        });
+
+        ventana.setVisible(true);
+    }
+=======
+    public void usersView() {
+
+        JFrame ventana = new JFrame();
+
+        ventana.setTitle("Visualización de Usuarios");
+        ventana.setSize(700, 500);
+        ventana.setLocationRelativeTo(null);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventana.setLayout(null);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBounds(0, 0, 700, 500);
+        panel.setBackground(Color.WHITE);
+
+        JLabel titulo = new JLabel("Lista de usuarios registrados");
+        titulo.setFont(new Font("Arial", Font.BOLD, 22));
+        titulo.setBounds(160, 20, 400, 30);
+
+        panel.add(titulo);
+
+        JTable tablaUsuarios = new JTable();
+
+        JScrollPane scroll = new JScrollPane(tablaUsuarios);
+        scroll.setBounds(40, 80, 600, 300);
+
+        panel.add(scroll);
+
+        DefaultTableModel modeloTabla = new DefaultTableModel();
+
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("USERNAME");
+        modeloTabla.addColumn("NOMBRE COMPLETO");
+
+        tablaUsuarios.setModel(modeloTabla);
+
+        ArrayList<User> listaUsuarios = model.obtenerUsuarios();
+
+        for (User usuario : listaUsuarios) {
+
+            modeloTabla.addRow(new Object[]{
+                    usuario.getId(),
+                    usuario.getUsername(),
+                    usuario.getNombreCompleto()
+            });
+        }
+
+        ventana.add(panel);
+
+        ventana.setVisible(true);
+    }
+
+>>>>>>> 809b7a8bf1381304f58afe62c4a7e01f2dc14182
 }
-
-
-
-
-
-

@@ -1,38 +1,27 @@
 package models;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class AuthModel {
 
-    private final String URL =
-            "jdbc:mysql://localhost:3306/login_app";
-
-    private final String USER = "root";
-
-    private final String PASSWORD = "";
+    private UserModel userModel;
 
     public AuthModel() {
-
+        userModel = new UserModel();
     }
 
     public boolean access(String username, String password) {
 
         String query =
-                "SELECT * FROM usuarios "
-              + "WHERE username = ? AND password = ?";
+                "SELECT * FROM usuarios WHERE username = ? AND password = ?";
 
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            Connection conn = DriverManager.getConnection(
-                    URL,
-                    USER,
-                    PASSWORD
-            );
+            Connection conn = userModel.conectar();
 
             PreparedStatement ps = conn.prepareStatement(query);
 
@@ -50,9 +39,55 @@ public class AuthModel {
             return existe;
 
         } catch (Exception e) {
-
             e.printStackTrace();
             return false;
         }
     }
+<<<<<<< HEAD
 }
+=======
+
+    public ArrayList<User> obtenerUsuarios() {
+
+        ArrayList<User> listaUsuarios = new ArrayList<>();
+
+        String query = "SELECT * FROM usuarios";
+
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection conn = DriverManager.getConnection(
+                    URL,
+                    USER,
+                    PASSWORD
+            );
+
+            Statement st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String nombreCompleto = rs.getString("nombreCompleto");
+
+                User usuario = new User(id, username, nombreCompleto);
+
+                listaUsuarios.add(usuario);
+            }
+
+            rs.close();
+            st.close();
+            conn.close();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        return listaUsuarios;
+    }
+}
+>>>>>>> 809b7a8bf1381304f58afe62c4a7e01f2dc14182
